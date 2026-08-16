@@ -29,6 +29,10 @@ export default function App() {
   const [currentView, setCurrentView] = useState<ViewMode>('dashboard');
   const [currentCity, setCurrentCity] = useState<ZambianCity>('Lusaka');
 
+  // Navigation History Stack (Back / Forward feature)
+  const [history, setHistory] = useState<ViewMode[]>(['dashboard']);
+  const [historyIndex, setHistoryIndex] = useState<number>(0);
+
   // Simulator Data State
   const [cameras, setCameras] = useState<CameraFeed[]>(simulator.getCameras());
   const [incidents, setIncidents] = useState<IncidentAlert[]>(simulator.getIncidents());
@@ -42,6 +46,32 @@ export default function App() {
   const [selectedCameraForStream, setSelectedCameraForStream] = useState<CameraFeed | null>(null);
   const [selectedViolationForCitation, setSelectedViolationForCitation] = useState<ViolationEvent | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+
+  // Keyboard navigation shortcuts: Alt+Left / Backspace (when not in input) / Alt+Right
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input or textarea
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT')) {
+        return;
+      }
+
+      if ((e.altKey && e.key === 'ArrowLeft') || (e.key === 'Backspace' && !e.ctrlKey && !e.metaKey)) {
+        if (historyIndex > 0) {
+          e.preventDefault();
+          handleGoBack();
+        }
+      } else if (e.altKey && e.key === 'ArrowRight') {
+        if (historyIndex < history.length - 1) {
+          e.preventDefault();
+          handleGoForward();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [historyIndex, history]);
 
   // Subscribe to real-time simulation updates
   useEffect(() => {
@@ -90,7 +120,7 @@ export default function App() {
   const handleTriggerEmergencySiren = () => {
     soundManager.playCriticalIncidentSiren();
     simulator.triggerManualEvent('COLLISION', currentCity);
-    setCurrentView('dispatch');
+    handleSelectView('dispatch');
   };
 
   const handleQuickSearchPlate = (plate: string) => {
@@ -114,14 +144,58 @@ export default function App() {
   const handleSelectView = (view: ViewMode) => {
     if (view === 'settings') {
       setIsSettingsOpen(true);
-    } else {
-      setCurrentView(view);
+      return;
+    }
+
+    if (view === currentView) return;
+
+    // Push new view to history stack up to current index and advance
+    const updatedHistory = history.slice(0, historyIndex + 1);
+    updatedHistory.push(view);
+    setHistory(updatedHistory);
+    setHistoryIndex(updatedHistory.length - 1);
+    setCurrentView(view);
+  };
+
+  const handleGoBack = () => {
+    if (historyIndex > 0) {
+      const prevIdx = historyIndex - 1;
+      setHistoryIndex(prevIdx);
+      setCurrentView(history[prevIdx]);
     }
   };
 
+  const handleGoForward = () => {
+    if (historyIndex < history.length - 1) {
+      const nextIdx = historyIndex + 1;
+      setHistoryIndex(nextIdx);
+      setCurrentView(history[nextIdx]);
+    }
+  };
+
+  // Helper map for view friendly display names
+  const viewNames: Record<ViewMode, string> = {
+    dashboard: 'Command Dashboard',
+    scenes: 'Live Scene Cinema',
+    map: 'Road Map',
+    cctv: 'CCTV Matrix',
+    vehicles: 'Vehicle Radar',
+    plates: 'ALPR Plates',
+    traffic: 'Traffic Monitor',
+    incidents: 'Incidents Feed',
+    dispatch: 'Dispatch Center',
+    patrols: 'Patrol Units',
+    analytics: 'Analytics',
+    settings: 'Settings'
+  };
+
+  const canGoBack = historyIndex > 0;
+  const canGoForward = historyIndex < history.length - 1;
+  const previousViewName = canGoBack ? viewNames[history[historyIndex - 1]] : undefined;
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white">
-      {/* Top Navigation Header with 3-Dot ⋮ Menu */}
+      {/* Top Navigation Header with Back / Previous Button, Breadcrumb & 3-Dot ⋮ Menu */}
       <Header
         currentView={currentView}
         onSelectView={handleSelectView}
@@ -131,10 +205,55 @@ export default function App() {
         onToggleSim={handleToggleSimulation}
         onQuickSearchPlate={handleQuickSearchPlate}
         onTriggerEmergencySiren={handleTriggerEmergencySiren}
+        canGoBack={canGoBack}
+        canGoForward={canGoForward}
+        onGoBack={handleGoBack}
+        onGoForward={handleGoForward}
+        previousViewName={previousViewName}
       />
 
       {/* Main Workspace Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5">
+        {/* Back / Previous breadcrumb bar for non-dashboard views */}
+        {currentView !== 'dashboard' && (
+          <div className="mb-3 flex items-center justify-between bg-slate-900/60 border border-slate-800/80 px-3.5 py-2 rounded-xl text-xs">
+            <div className="flex items-center gap-2">
+              <button
+                id="btn-subview-back-button"
+                onClick={handleGoBack}
+                disabled={!canGoBack}
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-medium transition ${
+                  canGoBack
+                    ? 'bg-slate-800 hover:bg-emerald-950/80 text-emerald-400 hover:text-emerald-300 border border-slate-700 hover:border-emerald-700'
+                    : 'bg-slate-800/40 text-slate-500 border border-slate-800 cursor-not-allowed'
+                }`}
+                title={canGoBack ? `Return to previous view: ${previousViewName}` : 'No previous view in history'}
+              >
+                <span className="font-bold">← Previous / Back</span>
+                {previousViewName && (
+                  <span className="hidden sm:inline text-slate-400 font-mono text-[11px]">
+                    ({previousViewName})
+                  </span>
+                )}
+              </button>
+
+              <span className="text-slate-600 hidden sm:inline">•</span>
+
+              <button
+                id="btn-subview-home-dashboard"
+                onClick={() => handleSelectView('dashboard')}
+                className="text-slate-400 hover:text-slate-200 transition font-mono text-[11px] hidden sm:inline"
+              >
+                Return to Dashboard Overview
+              </button>
+            </div>
+
+            <div className="text-[11px] font-mono text-slate-400">
+              Current: <span className="text-emerald-400 font-semibold">{viewNames[currentView]}</span>
+            </div>
+          </div>
+        )}
+
         {/* VIEW 1: Command Dashboard (Default Split Overview) */}
         {currentView === 'dashboard' && (
           <CommandDashboard
@@ -147,7 +266,7 @@ export default function App() {
             metrics={metrics}
             onSelectCamera={(cam) => setSelectedCameraForStream(cam)}
             onSelectIncident={(inc) => {
-              setCurrentView('dispatch');
+              handleSelectView('dispatch');
             }}
             onSelectViolationForCitation={(vio) => setSelectedViolationForCitation(vio)}
             onSelectView={handleSelectView}
@@ -193,7 +312,7 @@ export default function App() {
                 patrolUnits={patrolUnits}
                 onSelectCity={setCurrentCity}
                 onSelectCamera={(cam) => setSelectedCameraForStream(cam)}
-                onSelectIncident={() => setCurrentView('dispatch')}
+                onSelectIncident={() => handleSelectView('dispatch')}
               />
             </div>
           </div>

@@ -142,10 +142,13 @@ export function MapView({
     if (mapInstanceRef.current) return;
 
     const initialCity = ZAMBIAN_CITIES[currentCity] || ZAMBIAN_CITIES['Lusaka'];
+    const initLat = Number.isFinite(initialCity?.lat) ? initialCity.lat : -15.4167;
+    const initLng = Number.isFinite(initialCity?.lng) ? initialCity.lng : 28.2833;
+    const initZoom = Number.isFinite(initialCity?.zoom) ? initialCity.zoom : 13;
 
     const map = L.map(mapContainerRef.current, {
-      center: [initialCity.lat, initialCity.lng],
-      zoom: initialCity.zoom,
+      center: [initLat, initLng],
+      zoom: initZoom,
       zoomControl: false,
       attributionControl: false
     });
@@ -174,15 +177,29 @@ export function MapView({
     layerGroupRef.current = layerGroup;
     mapInstanceRef.current = map;
 
-    // Track zoom and movement for HUD details
+    // Track zoom and movement for HUD details safely
     map.on('zoomend', () => {
-      setCurrentZoom(map.getZoom());
+      const z = map.getZoom();
+      if (Number.isFinite(z)) {
+        setCurrentZoom(z);
+      }
     });
 
     map.on('moveend', () => {
       const center = map.getCenter();
-      setCurrentCenter({ lat: Number(center.lat.toFixed(4)), lng: Number(center.lng.toFixed(4)) });
+      if (center && Number.isFinite(center.lat) && Number.isFinite(center.lng)) {
+        setCurrentCenter({ lat: Number(center.lat.toFixed(4)), lng: Number(center.lng.toFixed(4)) });
+      }
     });
+
+    // Invalidate size once mounted so Leaflet dimensions compute accurately
+    setTimeout(() => {
+      try {
+        map.invalidateSize();
+      } catch (err) {
+        console.warn('Map invalidateSize skipped', err);
+      }
+    }, 150);
 
     return () => {
       map.remove();
@@ -230,13 +247,13 @@ export function MapView({
   // Update map center when city changes
   useEffect(() => {
     if (!mapInstanceRef.current) return;
-    const config = ZAMBIAN_CITIES[currentCity];
-    if (config) {
-      mapInstanceRef.current.flyTo([config.lat, config.lng], config.zoom, {
+    const config = ZAMBIAN_CITIES[currentCity] || ZAMBIAN_CITIES['Lusaka'];
+    if (config && Number.isFinite(config.lat) && Number.isFinite(config.lng)) {
+      mapInstanceRef.current.flyTo([config.lat, config.lng], config.zoom || 13, {
         duration: 1.2
       });
       setCurrentCenter({ lat: config.lat, lng: config.lng });
-      setCurrentZoom(config.zoom);
+      setCurrentZoom(config.zoom || 13);
     }
   }, [currentCity]);
 
@@ -248,6 +265,10 @@ export function MapView({
     // 1. Render CCTV Cameras
     if (showCameras) {
       cameras.forEach((camera) => {
+        const lat = Number(camera.lat);
+        const lng = Number(camera.lng);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
         const isOnline = camera.status === 'ONLINE';
         const hasViolations = camera.activeViolationsToday > 20;
 
@@ -275,14 +296,14 @@ export function MapView({
           iconAnchor: [16, 16]
         });
 
-        const marker = L.marker([camera.lat, camera.lng], { icon });
+        const marker = L.marker([lat, lng], { icon });
 
         marker.on('click', () => {
           onSelectCamera(camera);
         });
 
-        const gMapsDirectUrl = `https://www.google.com/maps/search/?api=1&query=${camera.lat},${camera.lng}`;
-        const gMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${camera.lat},${camera.lng}&travelmode=driving`;
+        const gMapsDirectUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        const gMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
 
         marker.bindPopup(`
           <div className="space-y-2 text-xs min-w-[210px]">
@@ -296,7 +317,7 @@ export function MapView({
             <div className="text-slate-300 font-mono">Speed Limit: <span className="text-amber-400 font-bold">${camera.speedLimit} km/h</span></div>
             <div className="text-slate-300 font-mono">Bearing: <span className="text-slate-200">${camera.bearing}</span></div>
             <div className="text-slate-300 font-mono">Detections Today: <span className="text-cyan-400 font-bold">${camera.detectedCountToday}</span></div>
-            <div className="text-[10px] text-slate-400 font-mono">GPS: ${camera.lat.toFixed(4)}, ${camera.lng.toFixed(4)}</div>
+            <div className="text-[10px] text-slate-400 font-mono">GPS: ${lat.toFixed(4)}, ${lng.toFixed(4)}</div>
             
             <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-slate-700">
               <a href="${gMapsDirectUrl}" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] py-1 px-1.5 rounded flex items-center justify-center gap-1 font-mono transition">
@@ -319,6 +340,10 @@ export function MapView({
     if (showIncidents) {
       incidents.forEach((inc) => {
         if (inc.status === 'RESOLVED' || inc.status === 'FALSE_ALARM') return;
+        const lat = Number(inc.lat);
+        const lng = Number(inc.lng);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
         const isCritical = inc.severity === 'CRITICAL';
 
         const incidentHtml = `
@@ -346,14 +371,14 @@ export function MapView({
           iconAnchor: [18, 18]
         });
 
-        const marker = L.marker([inc.lat, inc.lng], { icon });
+        const marker = L.marker([lat, lng], { icon });
 
         marker.on('click', () => {
           onSelectIncident(inc);
         });
 
-        const gMapsIncidentUrl = `https://www.google.com/maps/search/?api=1&query=${inc.lat},${inc.lng}`;
-        const gMapsNavigateIncident = `https://www.google.com/maps/dir/?api=1&destination=${inc.lat},${inc.lng}&travelmode=driving`;
+        const gMapsIncidentUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        const gMapsNavigateIncident = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
 
         marker.bindPopup(`
           <div className="space-y-2 text-xs min-w-[220px]">
@@ -385,6 +410,10 @@ export function MapView({
     // 3. Render Patrol Units
     if (showPatrols) {
       patrolUnits.forEach((patrol) => {
+        const lat = Number(patrol.lat);
+        const lng = Number(patrol.lng);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
         const isRtsa = patrol.agency === 'RTSA';
         const isEnRoute = patrol.status === 'EN_ROUTE';
 
@@ -412,13 +441,13 @@ export function MapView({
           iconAnchor: [16, 16]
         });
 
-        const marker = L.marker([patrol.lat, patrol.lng], { icon });
+        const marker = L.marker([lat, lng], { icon });
 
         if (onSelectPatrol) {
           marker.on('click', () => onSelectPatrol(patrol));
         }
 
-        const gMapsPatrolUrl = `https://www.google.com/maps/search/?api=1&query=${patrol.lat},${patrol.lng}`;
+        const gMapsPatrolUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 
         marker.bindPopup(`
           <div className="space-y-2 text-xs min-w-[210px]">

@@ -20,7 +20,10 @@ import {
   Search,
   CheckCircle,
   Activity,
-  Layers
+  Layers,
+  ChevronLeft,
+  ChevronRight,
+  ArrowLeft
 } from 'lucide-react';
 import { soundManager } from '../utils/sound';
 
@@ -33,6 +36,11 @@ interface HeaderProps {
   onToggleSim: () => void;
   onQuickSearchPlate: (plate: string) => void;
   onTriggerEmergencySiren: () => void;
+  canGoBack?: boolean;
+  canGoForward?: boolean;
+  onGoBack?: () => void;
+  onGoForward?: () => void;
+  previousViewName?: string;
 }
 
 export function Header({
@@ -43,7 +51,12 @@ export function Header({
   isSimRunning,
   onToggleSim,
   onQuickSearchPlate,
-  onTriggerEmergencySiren
+  onTriggerEmergencySiren,
+  canGoBack = false,
+  canGoForward = false,
+  onGoBack,
+  onGoForward,
+  previousViewName
 }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
@@ -117,8 +130,43 @@ export function Header({
   return (
     <header className="bg-slate-950/95 backdrop-blur-md border-b border-slate-800 sticky top-0 z-[1500] px-4 py-2.5 shadow-xl">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-        {/* Left Branding */}
-        <div className="flex items-center gap-3">
+        {/* Left Branding & Back / Forward Navigation */}
+        <div className="flex items-center gap-2.5">
+          {/* Back / Previous History Button */}
+          <div className="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+            <button
+              id="btn-nav-history-back"
+              onClick={onGoBack}
+              disabled={!canGoBack}
+              className={`p-1.5 rounded-md flex items-center gap-1 transition text-xs font-medium ${
+                canGoBack
+                  ? 'text-emerald-400 hover:bg-slate-800 hover:text-emerald-300 active:scale-95'
+                  : 'text-slate-600 cursor-not-allowed opacity-50'
+              }`}
+              title={canGoBack ? `Go Back to previous screen (${previousViewName || 'Previous'})` : 'No previous screen'}
+              aria-label="Previous / Back screen"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden xl:inline text-[11px] font-mono">Back</span>
+            </button>
+
+            {/* Forward History Button */}
+            <button
+              id="btn-nav-history-forward"
+              onClick={onGoForward}
+              disabled={!canGoForward}
+              className={`p-1.5 rounded-md transition ${
+                canGoForward
+                  ? 'text-emerald-400 hover:bg-slate-800 hover:text-emerald-300 active:scale-95'
+                  : 'text-slate-600 cursor-not-allowed opacity-50'
+              }`}
+              title={canGoForward ? 'Go forward to next screen' : 'No forward history'}
+              aria-label="Forward screen"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+
           <div
             onClick={() => onSelectView('dashboard')}
             className="flex items-center gap-2.5 cursor-pointer group"
@@ -332,11 +380,28 @@ export function Header({
             {isMenuOpen && (
               <div className="absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-700 rounded-2xl p-2 shadow-2xl z-[1600] space-y-1 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="px-3 py-2 border-b border-slate-800">
-                  <div className="text-xs font-bold text-slate-100 font-display">
-                    AI TRAFFIC COMMAND CENTER
-                  </div>
-                  <div className="text-[10px] text-slate-400 font-mono">
-                    Surveillance & Enforcement Protocol
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-slate-100 font-display">
+                        AI TRAFFIC COMMAND CENTER
+                      </div>
+                      <div className="text-[10px] text-slate-400 font-mono">
+                        Surveillance & Enforcement Protocol
+                      </div>
+                    </div>
+                    {canGoBack && (
+                      <button
+                        id="btn-menu-back-shortcut"
+                        onClick={() => {
+                          if (onGoBack) onGoBack();
+                          setIsMenuOpen(false);
+                        }}
+                        className="px-2 py-1 bg-slate-800 hover:bg-emerald-950/80 text-emerald-400 border border-slate-700 hover:border-emerald-700 rounded-lg text-[10px] font-mono flex items-center gap-1 transition"
+                      >
+                        <ArrowLeft className="w-3 h-3" />
+                        <span>Previous</span>
+                      </button>
+                    )}
                   </div>
                 </div>
 
