@@ -157,7 +157,7 @@ function SimulatedCameraCanvas({
       ref={canvasRef}
       width={360}
       height={180}
-      class="w-full h-auto rounded-lg bg-slate-950 border border-slate-800 shadow-inner"
+      className="w-full h-auto rounded-lg bg-slate-950 border border-slate-800 shadow-inner"
     />
   );
 }
@@ -173,29 +173,29 @@ export function CctvGrid({ cameras, selectedCity, onSelectCamera }: CctvGridProp
   });
 
   return (
-    <div id="cctv-surveillance-matrix" class="space-y-4">
+    <div id="cctv-surveillance-matrix" className="space-y-4">
       {/* Header & Controls */}
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/80 border border-slate-800 p-4 rounded-xl shadow-lg">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900/80 border border-slate-800 p-4 rounded-xl shadow-lg">
         <div>
-          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-            <Video class="w-5 h-5 text-emerald-400" />
+          <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
+            <Video className="w-5 h-5 text-emerald-400" />
             <span>Zambia CCTV AI Surveillance Matrix</span>
-            <span class="text-xs bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-mono">
+            <span className="text-xs bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded-full font-mono">
               {displayedCameras.length} Active Feeds
             </span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Real-time optical flow, Automated License Plate Recognition (ALPR), and radar velocity estimation.
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {/* City Filter */}
           <select
             id="cctv-city-filter"
             value={filterCity}
             onChange={(e) => setFilterCity(e.target.value)}
-            class="bg-slate-950 border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+            className="bg-slate-950 border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:ring-1 focus:ring-emerald-500 focus:outline-none"
           >
             <option value="ALL">All Zambian Cities</option>
             <option value="Lusaka">Lusaka</option>
@@ -210,13 +210,13 @@ export function CctvGrid({ cameras, selectedCity, onSelectCamera }: CctvGridProp
           <button
             id="cctv-toggle-ai-boxes"
             onClick={() => setShowAiTags(!showAiTags)}
-            class={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition border ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition border ${
               showAiTags
                 ? 'bg-emerald-950/80 text-emerald-300 border-emerald-700'
                 : 'bg-slate-800 text-slate-400 border-slate-700'
             }`}
           >
-            <ShieldCheck class="w-3.5 h-3.5" />
+            <ShieldCheck className="w-3.5 h-3.5" />
             <span>AI Bounding Boxes: {showAiTags ? 'ON' : 'OFF'}</span>
           </button>
 
@@ -224,54 +224,54 @@ export function CctvGrid({ cameras, selectedCity, onSelectCamera }: CctvGridProp
           <button
             id="cctv-toggle-night-vision"
             onClick={() => setNightVision(!nightVision)}
-            class={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition border ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition border ${
               nightVision
                 ? 'bg-cyan-950/80 text-cyan-300 border-cyan-700'
                 : 'bg-slate-800 text-slate-400 border-slate-700'
             }`}
           >
-            <Zap class="w-3.5 h-3.5" />
+            <Zap className="w-3.5 h-3.5" />
             <span>IR / Night Vision: {nightVision ? 'ON' : 'OFF'}</span>
           </button>
         </div>
       </div>
 
       {/* Grid Matrix */}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {displayedCameras.map((camera) => (
           <div
             key={camera.id}
             id={`cctv-card-${camera.id.toLowerCase()}`}
-            class="bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-3.5 shadow-xl transition duration-200 group flex flex-col justify-between"
+            className="bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 rounded-xl p-3.5 shadow-xl transition duration-200 group flex flex-col justify-between"
           >
             <div>
               {/* Card Header */}
-              <div class="flex items-center justify-between gap-2 mb-2">
-                <div class="truncate">
-                  <div class="text-xs font-bold text-slate-200 truncate group-hover:text-emerald-400 transition">
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="truncate">
+                  <div className="text-xs font-bold text-slate-200 truncate group-hover:text-emerald-400 transition">
                     {camera.name}
                   </div>
-                  <div class="text-[11px] font-mono text-slate-400 truncate">
+                  <div className="text-[11px] font-mono text-slate-400 truncate">
                     {camera.city} • {camera.road}
                   </div>
                 </div>
 
-                <div class="flex items-center gap-1 shrink-0">
+                <div className="flex items-center gap-1 shrink-0">
                   <span
-                    class={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
+                    className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold ${
                       camera.status === 'ONLINE'
                         ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
                         : 'bg-rose-950 text-rose-400'
                     }`}
                   >
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     {camera.status}
                   </span>
                 </div>
               </div>
 
               {/* Video Stream Canvas */}
-              <div class="relative overflow-hidden rounded-lg">
+              <div className="relative overflow-hidden rounded-lg">
                 <SimulatedCameraCanvas
                   camera={camera}
                   nightMode={nightVision}
@@ -281,26 +281,26 @@ export function CctvGrid({ cameras, selectedCity, onSelectCamera }: CctvGridProp
                 <button
                   id={`btn-maximize-cam-${camera.id.toLowerCase()}`}
                   onClick={() => onSelectCamera(camera)}
-                  class="absolute top-2 right-2 p-1.5 bg-slate-950/80 hover:bg-emerald-600 text-slate-200 hover:text-white rounded-md backdrop-blur border border-slate-700 transition"
+                  className="absolute top-2 right-2 p-1.5 bg-slate-950/80 hover:bg-emerald-600 text-slate-200 hover:text-white rounded-md backdrop-blur border border-slate-700 transition"
                   title="Expand Camera Feed"
                 >
-                  <Maximize2 class="w-3.5 h-3.5" />
+                  <Maximize2 className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Camera Metrics & Stats */}
-              <div class="grid grid-cols-3 gap-2 mt-3 text-[11px] font-mono bg-slate-950/60 p-2 rounded-lg border border-slate-800/80">
+              <div className="grid grid-cols-3 gap-2 mt-3 text-[11px] font-mono bg-slate-950/60 p-2 rounded-lg border border-slate-800/80">
                 <div>
-                  <span class="text-slate-400 block text-[10px]">SPEED LIMIT</span>
-                  <span class="font-bold text-amber-400">{camera.speedLimit} km/h</span>
+                  <span className="text-slate-400 block text-[10px]">SPEED LIMIT</span>
+                  <span className="font-bold text-amber-400">{camera.speedLimit} km/h</span>
                 </div>
                 <div>
-                  <span class="text-slate-400 block text-[10px]">SCANNED TODAY</span>
-                  <span class="font-bold text-cyan-400">{camera.detectedCountToday}</span>
+                  <span className="text-slate-400 block text-[10px]">SCANNED TODAY</span>
+                  <span className="font-bold text-cyan-400">{camera.detectedCountToday}</span>
                 </div>
                 <div>
-                  <span class="text-slate-400 block text-[10px]">VIOLATIONS</span>
-                  <span class={`font-bold ${camera.activeViolationsToday > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                  <span className="text-slate-400 block text-[10px]">VIOLATIONS</span>
+                  <span className={`font-bold ${camera.activeViolationsToday > 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
                     {camera.activeViolationsToday}
                   </span>
                 </div>
@@ -308,14 +308,14 @@ export function CctvGrid({ cameras, selectedCity, onSelectCamera }: CctvGridProp
             </div>
 
             {/* Action Bar */}
-            <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between">
-              <span class="text-[10px] text-slate-400 font-mono">
+            <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between">
+              <span className="text-[10px] text-slate-400 font-mono">
                 FPS: {camera.fps} | PTZ: LOCK
               </span>
               <button
                 id={`btn-inspect-cam-${camera.id.toLowerCase()}`}
                 onClick={() => onSelectCamera(camera)}
-                class="px-2.5 py-1 bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white rounded text-xs font-medium transition flex items-center gap-1"
+                className="px-2.5 py-1 bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white rounded text-xs font-medium transition flex items-center gap-1"
               >
                 <span>Live Feed HUD</span>
               </button>

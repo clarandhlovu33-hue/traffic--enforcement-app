@@ -46,49 +46,49 @@ export function VehicleDetectionView({
   });
 
   return (
-    <div id="vehicle-detection-explorer" class="space-y-4">
+    <div id="vehicle-detection-explorer" className="space-y-4">
       {/* Header & Search Filter Bar */}
-      <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-lg space-y-3">
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+      <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-lg space-y-3">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div>
-            <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-              <Car class="w-5 h-5 text-amber-400" />
+            <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
+              <Car className="w-5 h-5 text-amber-400" />
               <span>Automated License Plate Recognition (ALPR) & Vehicle Registry</span>
             </h2>
-            <p class="text-xs text-slate-400">
+            <p className="text-xs text-slate-400">
               Live OCR plate scanning across Zambian road corridors with automated RTSA National Database queries.
             </p>
           </div>
 
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-mono bg-slate-950 text-emerald-400 border border-slate-800 px-3 py-1.5 rounded-lg">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-mono bg-slate-950 text-emerald-400 border border-slate-800 px-3 py-1.5 rounded-lg">
               {filteredViolations.length} Scans in Cycle
             </span>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
           {/* Search Box */}
-          <div class="relative md:col-span-2">
-            <Search class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <div className="relative md:col-span-2">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               id="alpr-search-input"
               type="text"
               placeholder="Search number plate (e.g. ABC-1234, ZAM-5678), owner name, or corridor..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              class="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-400"
+              className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-400"
             />
           </div>
 
           {/* Filter Dropdown */}
-          <div class="flex items-center gap-2">
-            <Filter class="w-4 h-4 text-slate-400" />
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-slate-400" />
             <select
               id="alpr-type-filter"
               value={selectedViolationFilter}
               onChange={(e) => setSelectedViolationFilter(e.target.value)}
-              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400"
+              className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:ring-1 focus:ring-amber-400"
             >
               <option value="ALL">All Detection Types</option>
               <option value="Speeding">Speeding Only</option>
@@ -101,22 +101,22 @@ export function VehicleDetectionView({
       </div>
 
       {/* Detections Table / List */}
-      <div class="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-xl">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-950 text-slate-400 font-mono text-[11px] uppercase tracking-wider border-b border-slate-800">
+      <div className="bg-slate-900/90 border border-slate-800 rounded-xl overflow-hidden shadow-xl">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="bg-slate-950 text-slate-400 font-mono text-[11px] uppercase tracking-wider border-b border-slate-800">
               <tr>
-                <th class="py-3 px-4">Plate OCR</th>
-                <th class="py-3 px-4">Vehicle Model</th>
-                <th class="py-3 px-4">Registered Owner</th>
-                <th class="py-3 px-4">Velocity / Limit</th>
-                <th class="py-3 px-4">Detection Type</th>
-                <th class="py-3 px-4">Location & Corridor</th>
-                <th class="py-3 px-4">Timestamp</th>
-                <th class="py-3 px-4 text-right">Actions</th>
+                <th className="py-3 px-4">Plate OCR</th>
+                <th className="py-3 px-4">Vehicle Model</th>
+                <th className="py-3 px-4">Registered Owner</th>
+                <th className="py-3 px-4">Velocity / Limit</th>
+                <th className="py-3 px-4">Detection Type</th>
+                <th className="py-3 px-4">Location & Corridor</th>
+                <th className="py-3 px-4">Timestamp</th>
+                <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-800/60 font-sans">
+            <tbody className="divide-y divide-slate-800/60 font-sans">
               {filteredViolations.map((v) => {
                 const isSpeeding = v.speed > v.speedLimit;
                 const isHotlist = v.violationType === 'Stolen Vehicle Detected';
@@ -126,12 +126,12 @@ export function VehicleDetectionView({
                   <tr
                     key={v.id}
                     id={`alpr-row-${v.id.toLowerCase()}`}
-                    class="hover:bg-slate-800/50 transition duration-150 group"
+                    className="hover:bg-slate-800/50 transition duration-150 group"
                   >
                     {/* Plate */}
-                    <td class="py-3 px-4 font-mono font-bold text-sm">
+                    <td className="py-3 px-4 font-mono font-bold text-sm">
                       <span
-                        class={`inline-block px-2.5 py-1 rounded border shadow-sm ${
+                        className={`inline-block px-2.5 py-1 rounded border shadow-sm ${
                           isHotlist
                             ? 'bg-rose-950 text-rose-300 border-rose-600 animate-pulse'
                             : isSpeeding
@@ -144,38 +144,38 @@ export function VehicleDetectionView({
                     </td>
 
                     {/* Vehicle */}
-                    <td class="py-3 px-4 text-slate-300">
-                      <div class="font-medium text-slate-200">{v.vehicleDetails?.makeModel || 'Toyota Vehicle'}</div>
-                      <div class="text-[10px] text-slate-400 font-mono">{v.vehicleDetails?.category || 'Sedan'} • {v.vehicleDetails?.color || 'Silver'}</div>
+                    <td className="py-3 px-4 text-slate-300">
+                      <div className="font-medium text-slate-200">{v.vehicleDetails?.makeModel || 'Toyota Vehicle'}</div>
+                      <div className="text-[10px] text-slate-400 font-mono">{v.vehicleDetails?.category || 'Sedan'} • {v.vehicleDetails?.color || 'Silver'}</div>
                     </td>
 
                     {/* Owner */}
-                    <td class="py-3 px-4 text-slate-300">
-                      <div class="font-medium text-slate-200">{v.vehicleDetails?.ownerName || 'Motorist'}</div>
-                      <div class="text-[10px] text-slate-400 font-mono flex items-center gap-1">
-                        <Phone class="w-2.5 h-2.5" />
+                    <td className="py-3 px-4 text-slate-300">
+                      <div className="font-medium text-slate-200">{v.vehicleDetails?.ownerName || 'Motorist'}</div>
+                      <div className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
+                        <Phone className="w-2.5 h-2.5" />
                         <span>{v.vehicleDetails?.ownerPhone || '+260 97 ...'}</span>
                       </div>
                     </td>
 
                     {/* Velocity */}
-                    <td class="py-3 px-4 font-mono">
-                      <div class="flex items-center gap-1.5">
+                    <td className="py-3 px-4 font-mono">
+                      <div className="flex items-center gap-1.5">
                         <span
-                          class={`font-bold text-sm ${
+                          className={`font-bold text-sm ${
                             isSpeeding ? 'text-rose-400' : 'text-emerald-400'
                           }`}
                         >
                           {v.speed} km/h
                         </span>
                       </div>
-                      <span class="text-[10px] text-slate-400">Limit: {v.speedLimit} km/h</span>
+                      <span className="text-[10px] text-slate-400">Limit: {v.speedLimit} km/h</span>
                     </td>
 
                     {/* Violation Type */}
-                    <td class="py-3 px-4">
+                    <td className="py-3 px-4">
                       <span
-                        class={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium border ${
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium border ${
                           isHotlist
                             ? 'bg-rose-950 text-rose-300 border-rose-700'
                             : isSpeeding
@@ -183,28 +183,28 @@ export function VehicleDetectionView({
                             : 'bg-slate-950 text-slate-300 border-slate-700'
                         }`}
                       >
-                        {isHotlist && <AlertOctagon class="w-3 h-3 text-rose-400" />}
+                        {isHotlist && <AlertOctagon className="w-3 h-3 text-rose-400" />}
                         {v.violationType}
                       </span>
                     </td>
 
                     {/* Location */}
-                    <td class="py-3 px-4 text-slate-300">
-                      <div class="text-xs text-slate-200">{v.road}</div>
-                      <div class="text-[10px] text-slate-400 truncate max-w-[180px]">{v.city} • {v.location}</div>
+                    <td className="py-3 px-4 text-slate-300">
+                      <div className="text-xs text-slate-200">{v.road}</div>
+                      <div className="text-[10px] text-slate-400 truncate max-w-[180px]">{v.city} • {v.location}</div>
                     </td>
 
                     {/* Time */}
-                    <td class="py-3 px-4 font-mono text-[11px] text-slate-400">
+                    <td className="py-3 px-4 font-mono text-[11px] text-slate-400">
                       {v.timestamp}
                     </td>
 
                     {/* Actions */}
-                    <td class="py-3 px-4 text-right space-x-1.5 whitespace-nowrap">
+                    <td className="py-3 px-4 text-right space-x-1.5 whitespace-nowrap">
                       <button
                         id={`btn-view-owner-${v.id.toLowerCase()}`}
                         onClick={() => v.vehicleDetails && setActiveVehicleModal(v.vehicleDetails)}
-                        class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
+                        className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-xs transition"
                         title="View Driver & RTSA Records"
                       >
                         Driver Info
@@ -213,9 +213,9 @@ export function VehicleDetectionView({
                       <button
                         id={`btn-issue-notice-${v.id.toLowerCase()}`}
                         onClick={() => onSelectViolationForCitation(v)}
-                        class="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-medium transition inline-flex items-center gap-1"
+                        className="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-xs font-medium transition inline-flex items-center gap-1"
                       >
-                        <FileText class="w-3 h-3" />
+                        <FileText className="w-3 h-3" />
                         <span>Citation</span>
                       </button>
                     </td>
@@ -229,18 +229,18 @@ export function VehicleDetectionView({
 
       {/* Driver / Vehicle Details Modal Drawer */}
       {activeVehicleModal && (
-        <div class="fixed inset-0 z-[2500] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-amber-950 border border-amber-700 flex items-center justify-center text-amber-400">
-                  <Car class="w-4 h-4" />
+        <div className="fixed inset-0 z-[2500] bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-amber-950 border border-amber-700 flex items-center justify-center text-amber-400">
+                  <Car className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 class="text-sm font-bold text-slate-100 font-mono">
+                  <h3 className="text-sm font-bold text-slate-100 font-mono">
                     RTSA Motor Vehicle Dossier
                   </h3>
-                  <div class="text-xs text-slate-400 font-mono">
+                  <div className="text-xs text-slate-400 font-mono">
                     REG NUMBER: {activeVehicleModal.plateNumber}
                   </div>
                 </div>
@@ -248,52 +248,52 @@ export function VehicleDetectionView({
 
               <button
                 onClick={() => setActiveVehicleModal(null)}
-                class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800"
+                className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800"
               >
                 ✕
               </button>
             </div>
 
             {/* Vehicle Profile */}
-            <div class="grid grid-cols-2 gap-3 text-xs bg-slate-950 p-3.5 rounded-xl border border-slate-800 font-mono">
+            <div className="grid grid-cols-2 gap-3 text-xs bg-slate-950 p-3.5 rounded-xl border border-slate-800 font-mono">
               <div>
-                <span class="text-slate-400 block text-[10px]">MAKE & MODEL:</span>
-                <span class="font-bold text-slate-200">{activeVehicleModal.makeModel}</span>
+                <span className="text-slate-400 block text-[10px]">MAKE & MODEL:</span>
+                <span className="font-bold text-slate-200">{activeVehicleModal.makeModel}</span>
               </div>
               <div>
-                <span class="text-slate-400 block text-[10px]">BODY / COLOR:</span>
-                <span class="text-slate-200">{activeVehicleModal.color} ({activeVehicleModal.category})</span>
+                <span className="text-slate-400 block text-[10px]">BODY / COLOR:</span>
+                <span className="text-slate-200">{activeVehicleModal.color} ({activeVehicleModal.category})</span>
               </div>
               <div>
-                <span class="text-slate-400 block text-[10px]">REGISTERED OWNER:</span>
-                <span class="font-bold text-amber-300">{activeVehicleModal.ownerName}</span>
+                <span className="text-slate-400 block text-[10px]">REGISTERED OWNER:</span>
+                <span className="font-bold text-amber-300">{activeVehicleModal.ownerName}</span>
               </div>
               <div>
-                <span class="text-slate-400 block text-[10px]">OWNER NRC NO:</span>
-                <span class="text-slate-200">{activeVehicleModal.ownerNrc}</span>
+                <span className="text-slate-400 block text-[10px]">OWNER NRC NO:</span>
+                <span className="text-slate-200">{activeVehicleModal.ownerNrc}</span>
               </div>
               <div>
-                <span class="text-slate-400 block text-[10px]">CONTACT PHONE:</span>
-                <span class="text-cyan-400">{activeVehicleModal.ownerPhone}</span>
+                <span className="text-slate-400 block text-[10px]">CONTACT PHONE:</span>
+                <span className="text-cyan-400">{activeVehicleModal.ownerPhone}</span>
               </div>
               <div>
-                <span class="text-slate-400 block text-[10px]">PRIMARY CITY:</span>
-                <span class="text-slate-200">{activeVehicleModal.registeredCity}, Zambia</span>
+                <span className="text-slate-400 block text-[10px]">PRIMARY CITY:</span>
+                <span className="text-slate-200">{activeVehicleModal.registeredCity}, Zambia</span>
               </div>
             </div>
 
             {/* Statutory Compliance Cards */}
-            <div class="space-y-2">
-              <div class="text-xs font-bold text-slate-300 uppercase tracking-wider">
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
                 Statutory Road Safety Status
               </div>
 
-              <div class="grid grid-cols-3 gap-2 text-xs">
+              <div className="grid grid-cols-3 gap-2 text-xs">
                 {/* Road Tax */}
-                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-center">
-                  <span class="text-[10px] text-slate-400 block">ROAD TAX</span>
+                <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-center">
+                  <span className="text-[10px] text-slate-400 block">ROAD TAX</span>
                   <span
-                    class={`font-bold font-mono text-[11px] ${
+                    className={`font-bold font-mono text-[11px] ${
                       activeVehicleModal.roadTaxStatus === 'VALID' ? 'text-emerald-400' : 'text-rose-400'
                     }`}
                   >
@@ -302,10 +302,10 @@ export function VehicleDetectionView({
                 </div>
 
                 {/* Fitness */}
-                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-center">
-                  <span class="text-[10px] text-slate-400 block">RTSA FITNESS</span>
+                <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-center">
+                  <span className="text-[10px] text-slate-400 block">RTSA FITNESS</span>
                   <span
-                    class={`font-bold font-mono text-[11px] ${
+                    className={`font-bold font-mono text-[11px] ${
                       activeVehicleModal.fitnessStatus === 'VALID' ? 'text-emerald-400' : 'text-rose-400'
                     }`}
                   >
@@ -314,10 +314,10 @@ export function VehicleDetectionView({
                 </div>
 
                 {/* Insurance */}
-                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-center">
-                  <span class="text-[10px] text-slate-400 block">INSURANCE</span>
+                <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-center">
+                  <span className="text-[10px] text-slate-400 block">INSURANCE</span>
                   <span
-                    class={`font-bold font-mono text-[11px] ${
+                    className={`font-bold font-mono text-[11px] ${
                       activeVehicleModal.insuranceStatus === 'VALID' ? 'text-emerald-400' : 'text-rose-400'
                     }`}
                   >
@@ -328,10 +328,10 @@ export function VehicleDetectionView({
             </div>
 
             {activeVehicleModal.hotlistFlag && activeVehicleModal.hotlistFlag !== 'NONE' && (
-              <div class="bg-rose-950/80 border border-rose-700 p-3 rounded-xl flex items-center gap-2.5 text-rose-200 text-xs">
-                <AlertOctagon class="w-5 h-5 text-rose-400 shrink-0 animate-bounce" />
+              <div className="bg-rose-950/80 border border-rose-700 p-3 rounded-xl flex items-center gap-2.5 text-rose-200 text-xs">
+                <AlertOctagon className="w-5 h-5 text-rose-400 shrink-0 animate-bounce" />
                 <div>
-                  <span class="font-bold uppercase tracking-wide">NATIONAL CRIME / TRAFFIC HOTLIST FLAG:</span>
+                  <span className="font-bold uppercase tracking-wide">NATIONAL CRIME / TRAFFIC HOTLIST FLAG:</span>
                   <div>Vehicle flagged as <strong>{activeVehicleModal.hotlistFlag}</strong> on Zambia Police central database.</div>
                 </div>
               </div>
@@ -339,7 +339,7 @@ export function VehicleDetectionView({
 
             <button
               onClick={() => setActiveVehicleModal(null)}
-              class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium py-2 rounded-xl text-xs transition"
+              className="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium py-2 rounded-xl text-xs transition"
             >
               Close Dossier
             </button>

@@ -46,25 +46,25 @@ export function PatrolUnitsView({ patrolUnits, currentCity }: PatrolUnitsViewPro
   };
 
   return (
-    <div id="patrol-fleet-manager" class="space-y-4">
+    <div id="patrol-fleet-manager" className="space-y-4">
       {/* Header */}
-      <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h2 class="text-base font-bold text-slate-100 flex items-center gap-2">
-            <Radio class="w-5 h-5 text-cyan-400" />
+          <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
+            <Radio className="w-5 h-5 text-cyan-400" />
             <span>Zambia Highway Patrol & RTSA Tactical Fleet Tracking</span>
           </h2>
-          <p class="text-xs text-slate-400">
+          <p className="text-xs text-slate-400">
             Live GPS telemetry, status tracking, and VHF comms link for on-duty road enforcement squads.
           </p>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <select
             id="patrol-agency-filter"
             value={filterAgency}
             onChange={(e) => setFilterAgency(e.target.value)}
-            class="bg-slate-950 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-cyan-500 font-mono"
+            className="bg-slate-950 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-cyan-500 font-mono"
           >
             <option value="ALL">All Law Enforcement Agencies</option>
             <option value="RTSA">RTSA Highway Patrol</option>
@@ -75,14 +75,14 @@ export function PatrolUnitsView({ patrolUnits, currentCity }: PatrolUnitsViewPro
       </div>
 
       {radioPingSuccess && (
-        <div class="bg-cyan-950 border border-cyan-700 text-cyan-200 p-3 rounded-xl text-xs flex items-center gap-2 font-mono shadow-lg animate-in fade-in">
-          <Radio class="w-4 h-4 text-cyan-400" />
+        <div className="bg-cyan-950 border border-cyan-700 text-cyan-200 p-3 rounded-xl text-xs flex items-center gap-2 font-mono shadow-lg animate-in fade-in">
+          <Radio className="w-4 h-4 text-cyan-400" />
           <span>{radioPingSuccess}</span>
         </div>
       )}
 
       {/* Grid of Patrol Units */}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredPatrols.map((unit) => {
           const isRtsa = unit.agency === 'RTSA';
 
@@ -90,20 +90,20 @@ export function PatrolUnitsView({ patrolUnits, currentCity }: PatrolUnitsViewPro
             <div
               key={unit.id}
               id={`patrol-card-${unit.id.toLowerCase()}`}
-              class="bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 rounded-xl p-4 shadow-xl transition space-y-3 flex flex-col justify-between"
+              className="bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 rounded-xl p-4 shadow-xl transition space-y-3 flex flex-col justify-between"
             >
               <div>
                 {/* Card Top */}
-                <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
+                <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
                   <div>
-                    <div class="text-xs font-mono text-cyan-400 font-bold uppercase">{unit.agency.replace('_', ' ')}</div>
-                    <div class="text-sm font-bold text-slate-100 flex items-center gap-1.5">
+                    <div className="text-xs font-mono text-cyan-400 font-bold uppercase">{unit.agency.replace('_', ' ')}</div>
+                    <div className="text-sm font-bold text-slate-100 flex items-center gap-1.5">
                       <span>{unit.callSign}</span>
                     </div>
                   </div>
 
                   <span
-                    class={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${getStatusBadge(
+                    className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${getStatusBadge(
                       unit.status
                     )}`}
                   >
@@ -112,52 +112,61 @@ export function PatrolUnitsView({ patrolUnits, currentCity }: PatrolUnitsViewPro
                 </div>
 
                 {/* Info List */}
-                <div class="space-y-2 mt-3 text-xs font-mono">
-                  <div class="flex items-center justify-between">
-                    <span class="text-slate-400">OFFICER IN CHARGE:</span>
-                    <span class="text-slate-200 font-bold">{unit.officerInCharge}</span>
+                <div className="space-y-2 mt-3 text-xs font-mono">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">OFFICER IN CHARGE:</span>
+                    <span className="text-slate-200 font-bold">{unit.officerInCharge}</span>
                   </div>
 
-                  <div class="flex items-center justify-between">
-                    <span class="text-slate-400">ASSIGNED SECTOR:</span>
-                    <span class="text-slate-200 truncate max-w-[170px]">{unit.currentRoad}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">ASSIGNED SECTOR:</span>
+                    <span className="text-slate-200 truncate max-w-[170px]">{unit.currentRoad}</span>
                   </div>
 
-                  <div class="flex items-center justify-between">
-                    <span class="text-slate-400">STATION / CITY:</span>
-                    <span class="text-slate-200">{unit.city}, Zambia</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">STATION / CITY:</span>
+                    <span className="text-slate-200">{unit.city}, Zambia</span>
                   </div>
 
-                  <div class="flex items-center justify-between">
-                    <span class="text-slate-400">VEHICLE CLASS:</span>
-                    <span class="text-slate-200">{unit.vehicleType}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">VEHICLE CLASS:</span>
+                    <span className="text-slate-200">{unit.vehicleType}</span>
                   </div>
 
-                  <div class="flex items-center justify-between">
-                    <span class="text-slate-400">FUEL LEVEL:</span>
-                    <span class="text-emerald-400 font-bold flex items-center gap-1">
-                      <Fuel class="w-3 h-3" />
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">FUEL LEVEL:</span>
+                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                      <Fuel className="w-3 h-3" />
                       {unit.fuelLevel}%
                     </span>
                   </div>
 
-                  <div class="flex items-center justify-between">
-                    <span class="text-slate-400">DIRECT RADIO/PHONE:</span>
-                    <span class="text-cyan-300 font-medium">{unit.phone}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">DIRECT RADIO/PHONE:</span>
+                    <span className="text-cyan-300 font-medium">{unit.phone}</span>
                   </div>
                 </div>
               </div>
 
               {/* Action Bar */}
-              <div class="pt-2.5 border-t border-slate-800 flex items-center justify-between gap-2">
-                <span class="text-[10px] font-mono text-slate-400">GPS Ping: {unit.lastUpdated}</span>
+              <div className="pt-2.5 border-t border-slate-800 flex items-center justify-between gap-2">
+                <a
+                  href={`https://www.google.com/maps/@${unit.lat},${unit.lng},16z/data=!5m1!1e1`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-mono text-slate-400 hover:text-emerald-400 flex items-center gap-1 transition"
+                  title="Track Unit in Google Maps with Traffic"
+                >
+                  <MapPin className="w-3 h-3 text-cyan-400" />
+                  <span>Google Map</span>
+                </a>
 
                 <button
                   id={`btn-ping-unit-${unit.id.toLowerCase()}`}
                   onClick={() => handleRadioPing(unit.callSign)}
-                  class="px-2.5 py-1 bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white rounded-lg text-xs font-medium transition flex items-center gap-1 border border-slate-700"
+                  className="px-2.5 py-1 bg-slate-800 hover:bg-cyan-600 text-slate-200 hover:text-white rounded-lg text-xs font-medium transition flex items-center gap-1 border border-slate-700"
                 >
-                  <Send class="w-3 h-3" />
+                  <Send className="w-3 h-3" />
                   <span>Radio Ping</span>
                 </button>
               </div>

@@ -1050,30 +1050,30 @@ export function LiveOffenceSceneView({
   ]);
 
   return (
-    <div id="live-offence-scene-workspace" class="space-y-4">
+    <div id="live-offence-scene-workspace" className="space-y-4">
       {/* Top Header & Scene Placement Selector Menu */}
-      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-rose-950 border border-rose-700 flex items-center justify-center text-rose-400">
-              <Video class="w-4 h-4" />
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-rose-950 border border-rose-700 flex items-center justify-center text-rose-400">
+              <Video className="w-4 h-4" />
             </div>
             <div>
-              <h2 class="text-base font-bold text-slate-100 font-display flex items-center gap-2">
+              <h2 className="text-base font-bold text-slate-100 font-display flex items-center gap-2">
                 <span>Zambian Road Scene & Live Traffic Offence Cinema</span>
                 {isLiveMode ? (
-                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                     <span>LIVE STREAMING</span>
                   </span>
                 ) : (
-                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-950 text-amber-300 border border-amber-800 flex items-center gap-1 animate-pulse">
-                    <History class="w-3 h-3 text-amber-400" />
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-950 text-amber-300 border border-amber-800 flex items-center gap-1 animate-pulse">
+                    <History className="w-3 h-3 text-amber-400" />
                     <span>TIMELINE ARCHIVE: {selectedHistoricalViolation?.timestamp}</span>
                   </span>
                 )}
               </h2>
-              <p class="text-xs text-slate-400">
+              <p className="text-xs text-slate-400">
                 Witness live violations in real-time or scrub through past violation timestamps with dynamic CCTV scene image updating.
               </p>
             </div>
@@ -1081,75 +1081,75 @@ export function LiveOffenceSceneView({
         </div>
 
         {/* Scene Selection Dropdown Menu & View Controls */}
-        <div class="flex flex-wrap items-center gap-2 relative">
+        <div className="flex flex-wrap items-center gap-2 relative">
           {/* Display Mode Switcher (Canvas vs Optical CCTV Evidence Photo vs Split) */}
-          <div class="flex items-center bg-slate-950 p-0.5 rounded-xl border border-slate-800 text-xs font-mono">
+          <div className="flex items-center bg-slate-950 p-0.5 rounded-xl border border-slate-800 text-xs font-mono">
             <button
               id="btn-view-canvas"
               onClick={() => setDisplayMode('CANVAS')}
-              class={`px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition ${
+              className={`px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition ${
                 displayMode === 'CANVAS'
                   ? 'bg-slate-800 text-slate-100 font-bold border border-slate-700'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
               title="Simulation Canvas View"
             >
-              <Activity class="w-3.5 h-3.5 text-cyan-400" />
+              <Activity className="w-3.5 h-3.5 text-cyan-400" />
               <span>Sim Canvas</span>
             </button>
 
             <button
               id="btn-view-cctv-photo"
               onClick={() => setDisplayMode('EVIDENCE_PHOTO')}
-              class={`px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition ${
+              className={`px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition ${
                 displayMode === 'EVIDENCE_PHOTO'
                   ? 'bg-slate-800 text-slate-100 font-bold border border-slate-700'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
               title="Dynamic Camera Snapshot View"
             >
-              <ImageIcon class="w-3.5 h-3.5 text-rose-400" />
+              <ImageIcon className="w-3.5 h-3.5 text-rose-400" />
               <span>CCTV Photo</span>
             </button>
 
             <button
               id="btn-view-split"
               onClick={() => setDisplayMode('SPLIT')}
-              class={`px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition ${
+              className={`px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition ${
                 displayMode === 'SPLIT'
                   ? 'bg-slate-800 text-slate-100 font-bold border border-slate-700'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
               title="Split Screen View"
             >
-              <SplitSquareVertical class="w-3.5 h-3.5 text-amber-400" />
+              <SplitSquareVertical className="w-3.5 h-3.5 text-amber-400" />
               <span>Split</span>
             </button>
           </div>
 
           {/* Main Scene Selection Button / Menu */}
-          <div class="relative">
+          <div className="relative">
             <button
               id="btn-scene-picker-menu"
               onClick={() => setIsSceneMenuOpen(!isSceneMenuOpen)}
-              class="px-3.5 py-2 bg-slate-950 hover:bg-slate-800 text-slate-100 border border-slate-700 hover:border-emerald-500/60 rounded-xl text-xs font-mono font-bold flex items-center gap-2 transition shadow-lg"
+              className="px-3.5 py-2 bg-slate-950 hover:bg-slate-800 text-slate-100 border border-slate-700 hover:border-emerald-500/60 rounded-xl text-xs font-mono font-bold flex items-center gap-2 transition shadow-lg"
             >
-              <Navigation class="w-4 h-4 text-emerald-400" />
-              <span class="truncate max-w-[140px] sm:max-w-[200px]">Scene: {selectedScene.name}</span>
-              <ChevronDown class="w-4 h-4 text-slate-400" />
+              <Navigation className="w-4 h-4 text-emerald-400" />
+              <span className="truncate max-w-[140px] sm:max-w-[200px]">Scene: {selectedScene.name}</span>
+              <ChevronDown className="w-4 h-4 text-slate-400" />
             </button>
 
             {/* Scene Selector Menu Dropdown */}
             {isSceneMenuOpen && (
               <div
                 id="scene-selection-dropdown"
-                class="absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-700 rounded-2xl p-2 shadow-2xl z-[2200] space-y-1.5 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[480px] overflow-y-auto"
+                className="absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-700 rounded-2xl p-2 shadow-2xl z-[2200] space-y-1.5 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[480px] overflow-y-auto"
               >
-                <div class="px-3 py-2 border-b border-slate-800 flex items-center justify-between">
-                  <span class="text-xs font-bold text-slate-200 uppercase font-mono">
+                <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-200 uppercase font-mono">
                     Select Specific Zambian Scene
                   </span>
-                  <span class="text-[10px] font-mono text-emerald-400">
+                  <span className="text-[10px] font-mono text-emerald-400">
                     {ZAMBIAN_SCENES.length} SCENES
                   </span>
                 </div>
@@ -1164,31 +1164,31 @@ export function LiveOffenceSceneView({
                         onSelectCity(scene.city);
                         setIsSceneMenuOpen(false);
                       }}
-                      class={`w-full text-left p-2.5 rounded-xl border text-xs transition flex items-start gap-3 ${
+                      className={`w-full text-left p-2.5 rounded-xl border text-xs transition flex items-start gap-3 ${
                         isCurrent
                           ? 'bg-slate-800 border-emerald-500/80 text-white shadow-md'
                           : 'bg-slate-950/60 border-slate-800/80 hover:bg-slate-800/60 text-slate-300'
                       }`}
                     >
-                      <div class="w-12 h-12 rounded-lg bg-slate-900 overflow-hidden border border-slate-700 shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-slate-900 overflow-hidden border border-slate-700 shrink-0">
                         <img
                           src={scene.backgroundImage}
                           alt={scene.name}
-                          class="w-full h-full object-cover"
+                          className="w-full h-full object-cover"
                         />
                       </div>
 
-                      <div class="flex-1 min-w-0">
-                        <div class="flex items-center justify-between">
-                          <span class="font-bold text-slate-100 truncate">{scene.name}</span>
-                          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-slate-100 truncate">{scene.name}</span>
+                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
                             {scene.speedLimit} km/h
                           </span>
                         </div>
-                        <div class="text-[11px] text-slate-400 truncate mt-0.5">
+                        <div className="text-[11px] text-slate-400 truncate mt-0.5">
                           {scene.city} • {scene.junctionType.replace(/_/g, ' ')}
                         </div>
-                        <div class="text-[10px] font-mono text-rose-400 mt-1">
+                        <div className="text-[10px] font-mono text-rose-400 mt-1">
                           Default Offence: {scene.defaultOffenceType}
                         </div>
                       </div>
@@ -1199,18 +1199,31 @@ export function LiveOffenceSceneView({
             )}
           </div>
 
+          {/* Google Maps Corridor View Button */}
+          <a
+            id="btn-scene-google-maps"
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedScene.name + ' ' + selectedScene.city + ' Zambia')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-emerald-500/60 rounded-xl text-xs font-mono font-medium flex items-center gap-1.5 transition"
+            title="Open Scene Location in Google Maps with Live Traffic"
+          >
+            <MapPin className="w-3.5 h-3.5 text-rose-400" />
+            <span className="hidden sm:inline">Google Maps</span>
+          </a>
+
           {/* Place Sensor / Camera Tool */}
           <button
             id="btn-place-sensor-tool"
             onClick={() => setIsPlacingSensor(!isPlacingSensor)}
-            class={`px-3 py-2 rounded-xl text-xs font-mono font-medium flex items-center gap-1.5 transition border ${
+            className={`px-3 py-2 rounded-xl text-xs font-mono font-medium flex items-center gap-1.5 transition border ${
               isPlacingSensor
                 ? 'bg-cyan-600 text-white border-cyan-400 shadow-lg shadow-cyan-900/50 animate-pulse'
                 : 'bg-slate-950 hover:bg-slate-800 text-cyan-300 border-slate-700'
             }`}
             title="Click on the road canvas to place a custom radar or ALPR camera node"
           >
-            <Crosshair class="w-3.5 h-3.5" />
+            <Crosshair className="w-3.5 h-3.5" />
             <span>{isPlacingSensor ? 'Click Road to Place...' : 'Place Sensor'}</span>
           </button>
         </div>
@@ -1221,28 +1234,28 @@ export function LiveOffenceSceneView({
       {/* ========================================================================= */}
       <div
         id="timeline-scrub-workspace"
-        class="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-2xl space-y-3"
+        className="bg-slate-900/95 border border-slate-800 rounded-2xl p-4 shadow-2xl space-y-3"
       >
         {/* Timeline Top Control Strip */}
-        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2 border-b border-slate-800 text-xs">
-          <div class="flex items-center gap-3">
-            <div class="flex items-center gap-2">
-              <Clock class="w-4 h-4 text-cyan-400" />
-              <span class="font-bold text-slate-200 uppercase font-mono tracking-wider">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 pb-2 border-b border-slate-800 text-xs">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-cyan-400" />
+              <span className="font-bold text-slate-200 uppercase font-mono tracking-wider">
                 Violation Timeline Scrub Bar
               </span>
             </div>
 
             {/* Current Scrubbed Timestamp Badge */}
-            <div class="flex items-center gap-1.5 font-mono text-xs">
+            <div className="flex items-center gap-1.5 font-mono text-xs">
               {isLiveMode ? (
-                <span class="px-2.5 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700 text-emerald-300 font-bold flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span className="px-2.5 py-1 rounded-lg bg-emerald-950/80 border border-emerald-700 text-emerald-300 font-bold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                   <span>NOW: {new Date().toLocaleTimeString()} (LIVE)</span>
                 </span>
               ) : (
-                <span class="px-2.5 py-1 rounded-lg bg-rose-950/80 border border-rose-700 text-rose-300 font-bold flex items-center gap-1.5">
-                  <History class="w-3.5 h-3.5 text-rose-400" />
+                <span className="px-2.5 py-1 rounded-lg bg-rose-950/80 border border-rose-700 text-rose-300 font-bold flex items-center gap-1.5">
+                  <History className="w-3.5 h-3.5 text-rose-400" />
                   <span>SCRUBBED TIMESTAMP: {selectedHistoricalViolation?.timestamp} CAT</span>
                 </span>
               )}
@@ -1250,13 +1263,13 @@ export function LiveOffenceSceneView({
           </div>
 
           {/* Quick Jump Controls & Corridor Filter */}
-          <div class="flex items-center gap-2 flex-wrap">
-            <label class="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer font-mono mr-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <label className="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer font-mono mr-2">
               <input
                 type="checkbox"
                 checked={filterCurrentCorridorOnly}
                 onChange={(e) => setFilterCurrentCorridorOnly(e.target.checked)}
-                class="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0"
+                className="rounded bg-slate-800 border-slate-700 text-emerald-500 focus:ring-0"
               />
               <span>Filter this Corridor</span>
             </label>
@@ -1265,10 +1278,10 @@ export function LiveOffenceSceneView({
             <button
               id="btn-timeline-prev-violation"
               onClick={handleStepPrevViolation}
-              class="px-2.5 py-1.5 bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 rounded-lg text-xs font-mono font-medium flex items-center gap-1 transition"
+              className="px-2.5 py-1.5 bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 rounded-lg text-xs font-mono font-medium flex items-center gap-1 transition"
               title="Jump to Previous Past Offence"
             >
-              <Rewind class="w-3.5 h-3.5 text-cyan-400" />
+              <Rewind className="w-3.5 h-3.5 text-cyan-400" />
               <span>Prev Offence</span>
             </button>
 
@@ -1276,34 +1289,34 @@ export function LiveOffenceSceneView({
             <button
               id="btn-timeline-next-violation"
               onClick={handleStepNextViolation}
-              class="px-2.5 py-1.5 bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 rounded-lg text-xs font-mono font-medium flex items-center gap-1 transition"
+              className="px-2.5 py-1.5 bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 rounded-lg text-xs font-mono font-medium flex items-center gap-1 transition"
               title="Jump to Next Offence"
             >
               <span>Next Offence</span>
-              <FastForward class="w-3.5 h-3.5 text-cyan-400" />
+              <FastForward className="w-3.5 h-3.5 text-cyan-400" />
             </button>
 
             {/* Return to Live Button */}
             <button
               id="btn-timeline-jump-live"
               onClick={handleReturnToLive}
-              class={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition flex items-center gap-1.5 shadow ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition flex items-center gap-1.5 shadow ${
                 isLiveMode
                   ? 'bg-emerald-600/30 text-emerald-300 border border-emerald-500/50 cursor-default'
                   : 'bg-rose-600 hover:bg-rose-500 text-white animate-pulse'
               }`}
             >
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
               <span>{isLiveMode ? 'LIVE REAL-TIME' : 'Return to LIVE (NOW)'}</span>
             </button>
           </div>
         </div>
 
         {/* Interactive Scrub Range Slider with Marker Indicators */}
-        <div class="space-y-2 pt-1">
-          <div class="relative w-full py-2">
+        <div className="space-y-2 pt-1">
+          <div className="relative w-full py-2">
             {/* Background Track with Color Severity Ticks */}
-            <div class="h-3 w-full bg-slate-950 rounded-full border border-slate-800 relative overflow-hidden flex items-center">
+            <div className="h-3 w-full bg-slate-950 rounded-full border border-slate-800 relative overflow-hidden flex items-center">
               {/* Event Marker Dots along scrub track */}
               {timelineViolations.map((vio, idx) => {
                 const total = timelineViolations.length;
@@ -1324,7 +1337,7 @@ export function LiveOffenceSceneView({
                     key={vio.id}
                     onClick={() => handleJumpToViolation(idx)}
                     style={{ left: `${posPercent}%` }}
-                    class={`absolute -translate-x-1/2 w-2.5 h-2.5 rounded-full ${markerColor} transition-transform hover:scale-150 z-10 ${
+                    className={`absolute -translate-x-1/2 w-2.5 h-2.5 rounded-full ${markerColor} transition-transform hover:scale-150 z-10 ${
                       isSelected ? 'ring-2 ring-white scale-125' : 'opacity-80'
                     }`}
                     title={`${vio.timestamp} - ${vio.plateNumber} (${vio.violationType})`}
@@ -1335,7 +1348,7 @@ export function LiveOffenceSceneView({
               {/* Live Position Marker on far right */}
               <div
                 style={{ right: '4px' }}
-                class="absolute w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-75 z-10"
+                className="absolute w-3 h-3 rounded-full bg-emerald-400 animate-ping opacity-75 z-10"
               />
             </div>
 
@@ -1356,42 +1369,42 @@ export function LiveOffenceSceneView({
                   handleJumpToViolation(targetIdx);
                 }
               }}
-              class="w-full absolute inset-0 opacity-0 cursor-pointer h-full z-20"
+              className="w-full absolute inset-0 opacity-0 cursor-pointer h-full z-20"
             />
           </div>
 
           {/* Timeline Range Footnotes */}
-          <div class="flex items-center justify-between text-[11px] font-mono text-slate-400 px-1">
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-500">PAST EVENTS:</span>
+          <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 px-1">
+            <div className="flex items-center gap-1.5">
+              <span className="text-slate-500">PAST EVENTS:</span>
               <span>{timelineViolations[timelineViolations.length - 1]?.timestamp || '16:00:00'}</span>
             </div>
 
-            <div class="flex items-center gap-3 text-[10px]">
-              <span class="flex items-center gap-1 text-cyan-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Speeding
+            <div className="flex items-center gap-3 text-[10px]">
+              <span className="flex items-center gap-1 text-cyan-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Speeding
               </span>
-              <span class="flex items-center gap-1 text-amber-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Red Light
+              <span className="flex items-center gap-1 text-amber-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Red Light
               </span>
-              <span class="flex items-center gap-1 text-rose-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Reckless
+              <span className="flex items-center gap-1 text-rose-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Reckless
               </span>
-              <span class="flex items-center gap-1 text-purple-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> Stolen
+              <span className="flex items-center gap-1 text-purple-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span> Stolen
               </span>
             </div>
 
-            <div class="flex items-center gap-1 text-emerald-400 font-bold">
+            <div className="flex items-center gap-1 text-emerald-400 font-bold">
               <span>LIVE CURRENT TIME (NOW)</span>
             </div>
           </div>
         </div>
 
         {/* Quick-Jump Event Carousel Strip */}
-        <div class="pt-1 overflow-x-auto pb-1 flex items-center gap-2 scrollbar-thin scrollbar-thumb-slate-800">
-          <span class="text-[10px] font-mono uppercase text-slate-400 shrink-0 font-bold flex items-center gap-1">
-            <History class="w-3 h-3 text-cyan-400" />
+        <div className="pt-1 overflow-x-auto pb-1 flex items-center gap-2 scrollbar-thin scrollbar-thumb-slate-800">
+          <span className="text-[10px] font-mono uppercase text-slate-400 shrink-0 font-bold flex items-center gap-1">
+            <History className="w-3 h-3 text-cyan-400" />
             <span>Recorded Incidents ({timelineViolations.length}):</span>
           </span>
 
@@ -1401,26 +1414,26 @@ export function LiveOffenceSceneView({
               <button
                 key={vio.id}
                 onClick={() => handleJumpToViolation(index)}
-                class={`px-2.5 py-1.5 rounded-xl border text-xs font-mono shrink-0 transition flex items-center gap-2 ${
+                className={`px-2.5 py-1.5 rounded-xl border text-xs font-mono shrink-0 transition flex items-center gap-2 ${
                   isSelected
                     ? 'bg-rose-950 border-rose-500 text-white shadow-lg ring-1 ring-rose-500'
                     : 'bg-slate-950/80 border-slate-800 hover:bg-slate-800/80 text-slate-300'
                 }`}
               >
                 {/* Event Thumbnail Preview */}
-                <div class="w-6 h-6 rounded-md overflow-hidden bg-slate-900 border border-slate-700 shrink-0">
+                <div className="w-6 h-6 rounded-md overflow-hidden bg-slate-900 border border-slate-700 shrink-0">
                   <img
                     src={vio.imageUrl || selectedScene.backgroundImage}
                     alt={vio.plateNumber}
-                    class="w-full h-full object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
-                <div class="text-left">
-                  <div class="flex items-center gap-1.5">
-                    <span class="font-bold text-slate-200">{vio.timestamp}</span>
+                <div className="text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-slate-200">{vio.timestamp}</span>
                     <span
-                      class={`text-[9px] px-1 py-0.2 rounded font-bold ${
+                      className={`text-[9px] px-1 py-0.2 rounded font-bold ${
                         vio.violationType === 'Stolen Vehicle Detected'
                           ? 'bg-purple-950 text-purple-300 border border-purple-800'
                           : vio.violationType === 'Red Light'
@@ -1431,7 +1444,7 @@ export function LiveOffenceSceneView({
                       {vio.violationType}
                     </span>
                   </div>
-                  <div class="text-[10px] text-slate-400">
+                  <div className="text-[10px] text-slate-400">
                     {vio.plateNumber} • {vio.speed} km/h
                   </div>
                 </div>
@@ -1444,77 +1457,77 @@ export function LiveOffenceSceneView({
       {/* ========================================================================= */}
       {/* MAIN LIVE SCENE CINEMA & DYNAMIC IMAGE DISPLAY */}
       {/* ========================================================================= */}
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Left Side: Live Animated Scene Screen / Dynamic Snapshot (8 Cols) */}
-        <div class="lg:col-span-8 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-2xl flex flex-col space-y-3">
+        <div className="lg:col-span-8 bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-2xl flex flex-col space-y-3">
           {/* Top Canvas Toolbar */}
-          <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-            <div class="flex items-center gap-2">
-              <span class="text-slate-400">CORRIDOR:</span>
-              <span class="text-slate-200 font-bold">{selectedScene.road}</span>
-              <span class="text-slate-500">|</span>
-              <span class="text-amber-400 font-bold">Limit: {selectedScene.speedLimit} km/h</span>
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-400">CORRIDOR:</span>
+              <span className="text-slate-200 font-bold">{selectedScene.road}</span>
+              <span className="text-slate-500">|</span>
+              <span className="text-amber-400 font-bold">Limit: {selectedScene.speedLimit} km/h</span>
               {!isLiveMode && (
-                <span class="px-2 py-0.5 rounded bg-rose-950 border border-rose-800 text-rose-300 font-bold">
+                <span className="px-2 py-0.5 rounded bg-rose-950 border border-rose-800 text-rose-300 font-bold">
                   TIMESTAMP: {selectedHistoricalViolation?.timestamp}
                 </span>
               )}
             </div>
 
             {/* Optics Mode Toggles */}
-            <div class="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5">
               <button
                 id="btn-toggle-scene-ai-hud"
                 onClick={() => setShowAiHud(!showAiHud)}
-                class={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition flex items-center gap-1 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition flex items-center gap-1 ${
                   showAiHud
                     ? 'bg-emerald-950 text-emerald-300 border-emerald-600'
                     : 'bg-slate-950 text-slate-400 border-slate-800'
                 }`}
               >
-                <Eye class="w-3 h-3" />
+                <Eye className="w-3 h-3" />
                 <span>AI HUD</span>
               </button>
 
               <button
                 id="btn-toggle-scene-radar-lines"
                 onClick={() => setShowRadarVectors(!showRadarVectors)}
-                class={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition flex items-center gap-1 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-medium border transition flex items-center gap-1 ${
                   showRadarVectors
                     ? 'bg-cyan-950 text-cyan-300 border-cyan-600'
                     : 'bg-slate-950 text-slate-400 border-slate-800'
                 }`}
               >
-                <Zap class="w-3 h-3" />
+                <Zap className="w-3 h-3" />
                 <span>Radar Lines</span>
               </button>
 
               <button
                 id="btn-toggle-scene-sound"
                 onClick={() => setSoundEnabled(!soundEnabled)}
-                class={`p-1.5 rounded-lg border transition ${
+                className={`p-1.5 rounded-lg border transition ${
                   soundEnabled
                     ? 'bg-slate-950 text-emerald-400 border-slate-700'
                     : 'bg-slate-950 text-slate-500 border-slate-800'
                 }`}
                 title="Toggle Radar Audio Chimes"
               >
-                {soundEnabled ? <Volume2 class="w-3.5 h-3.5" /> : <VolumeX class="w-3.5 h-3.5" />}
+                {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
               </button>
             </div>
           </div>
 
           {/* Interactive Simulation Canvas / Dynamic Optical Image View */}
-          <div class="relative bg-slate-950 rounded-xl overflow-hidden border border-slate-800 shadow-inner min-h-[360px] sm:min-h-[400px] flex items-center justify-center">
+          <div className="relative bg-slate-950 rounded-xl overflow-hidden border border-slate-800 shadow-inner min-h-[360px] sm:min-h-[400px] flex items-center justify-center">
             {/* View Mode: CANVAS or SPLIT */}
             {(displayMode === 'CANVAS' || displayMode === 'SPLIT') && (
-              <div class={displayMode === 'SPLIT' ? 'w-1/2 h-full' : 'w-full h-full'}>
+              <div className={displayMode === 'SPLIT' ? 'w-1/2 h-full' : 'w-full h-full'}>
                 <canvas
                   ref={canvasRef}
                   width={displayMode === 'SPLIT' ? 400 : 800}
                   height={380}
                   onClick={handleCanvasClick}
-                  class={`w-full h-[360px] sm:h-[400px] object-cover cursor-${
+                  className={`w-full h-[360px] sm:h-[400px] object-cover cursor-${
                     isPlacingSensor ? 'crosshair' : 'default'
                   } ${isThermal ? 'filter invert hue-rotate-180 contrast-150' : ''}`}
                 />
@@ -1524,7 +1537,7 @@ export function LiveOffenceSceneView({
             {/* View Mode: EVIDENCE_PHOTO (Dynamic High-Res Scene & Violation Image) */}
             {(displayMode === 'EVIDENCE_PHOTO' || displayMode === 'SPLIT') && (
               <div
-                class={`relative ${
+                className={`relative ${
                   displayMode === 'SPLIT' ? 'w-1/2 h-[360px] sm:h-[400px]' : 'w-full h-[360px] sm:h-[400px]'
                 } overflow-hidden bg-slate-950`}
               >
@@ -1532,37 +1545,37 @@ export function LiveOffenceSceneView({
                 <img
                   src={currentSceneImage}
                   alt={selectedScene.name}
-                  class="w-full h-full object-cover transition-opacity duration-300"
+                  className="w-full h-full object-cover transition-opacity duration-300"
                 />
 
                 {/* Optical Evidence HUD Overlay */}
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/60 p-3 flex flex-col justify-between pointer-events-none">
-                  <div class="flex items-center justify-between">
-                    <div class="bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] font-mono text-slate-100 flex items-center gap-2">
-                      <Camera class="w-3.5 h-3.5 text-emerald-400" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/60 p-3 flex flex-col justify-between pointer-events-none">
+                  <div className="flex items-center justify-between">
+                    <div className="bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] font-mono text-slate-100 flex items-center gap-2">
+                      <Camera className="w-3.5 h-3.5 text-emerald-400" />
                       <span>{selectedScene.cameraNodeId} • OPTICAL ALPR 4K</span>
                     </div>
 
-                    <div class="bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] font-mono text-amber-300">
+                    <div className="bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-[11px] font-mono text-amber-300">
                       {isLiveMode ? 'LIVE OPTICAL FEED' : `EVIDENCE: ${selectedHistoricalViolation?.timestamp}`}
                     </div>
                   </div>
 
                   {/* AI OCR Bounding Box on Image */}
                   {activeOffence && showAiHud && (
-                    <div class="absolute top-1/3 left-1/3 p-3 border-2 border-rose-500 bg-rose-950/30 rounded-lg animate-pulse pointer-events-auto">
-                      <div class="bg-rose-600 text-white text-[10px] font-mono font-bold px-1.5 py-0.5 rounded -mt-6 -ml-2 w-max shadow">
+                    <div className="absolute top-1/3 left-1/3 p-3 border-2 border-rose-500 bg-rose-950/30 rounded-lg animate-pulse pointer-events-auto">
+                      <div className="bg-rose-600 text-white text-[10px] font-mono font-bold px-1.5 py-0.5 rounded -mt-6 -ml-2 w-max shadow">
                         ALPR MATCH: {activeOffence.plate} • {activeOffence.speed} km/h
                       </div>
-                      <div class="text-[10px] font-mono text-rose-200 mt-1">
+                      <div className="text-[10px] font-mono text-rose-200 mt-1">
                         Offence: {activeOffence.offenceType || 'Infraction'}
                       </div>
                     </div>
                   )}
 
-                  <div class="flex items-center justify-between text-xs font-mono text-slate-300">
+                  <div className="flex items-center justify-between text-xs font-mono text-slate-300">
                     <div>{selectedScene.name}</div>
-                    <div class="text-rose-400 font-bold">
+                    <div className="text-rose-400 font-bold">
                       {activeOffence ? `CLOCK: ${activeOffence.speed} km/h (Limit: ${selectedScene.speedLimit})` : ''}
                     </div>
                   </div>
@@ -1572,41 +1585,41 @@ export function LiveOffenceSceneView({
 
             {/* Live / Historical Offence Floating Alert Toast */}
             {offenceNotification && (
-              <div class="absolute bottom-3 left-3 right-3 bg-rose-950/95 backdrop-blur-md border border-rose-600 text-slate-100 p-3 rounded-xl shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 animate-in slide-in-from-bottom-2 duration-200 z-30">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-7 h-7 rounded-lg bg-rose-600 flex items-center justify-center text-white shrink-0 animate-pulse">
-                    <ShieldAlert class="w-4 h-4" />
+              <div className="absolute bottom-3 left-3 right-3 bg-rose-950/95 backdrop-blur-md border border-rose-600 text-slate-100 p-3 rounded-xl shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 animate-in slide-in-from-bottom-2 duration-200 z-30">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-rose-600 flex items-center justify-center text-white shrink-0 animate-pulse">
+                    <ShieldAlert className="w-4 h-4" />
                   </div>
                   <div>
-                    <div class="text-xs font-bold text-rose-200 flex items-center gap-2">
+                    <div className="text-xs font-bold text-rose-200 flex items-center gap-2">
                       <span>{offenceNotification.title}</span>
-                      <span class="font-mono bg-slate-900 px-1.5 py-0.2 rounded text-amber-300 text-[10px]">
+                      <span className="font-mono bg-slate-900 px-1.5 py-0.2 rounded text-amber-300 text-[10px]">
                         {offenceNotification.plate}
                       </span>
-                      <span class="text-[10px] font-mono text-slate-400">
+                      <span className="text-[10px] font-mono text-slate-400">
                         ({offenceNotification.timestamp})
                       </span>
                     </div>
-                    <div class="text-[11px] text-slate-300">{offenceNotification.description}</div>
+                    <div className="text-[11px] text-slate-300">{offenceNotification.description}</div>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
                   <button
                     id="btn-live-toast-issue-notice"
                     onClick={handleGenerateCitationFromLiveOffence}
-                    class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold font-mono transition flex items-center gap-1"
+                    className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold font-mono transition flex items-center gap-1"
                   >
-                    <FileText class="w-3.5 h-3.5" />
+                    <FileText className="w-3.5 h-3.5" />
                     <span>Issue Citation (K{offenceNotification.fine})</span>
                   </button>
 
                   <button
                     id="btn-live-toast-dispatch"
                     onClick={handleDispatchPatrolToScene}
-                    class="px-2.5 py-1.5 bg-rose-700 hover:bg-rose-600 text-white rounded-lg text-xs font-bold font-mono transition flex items-center gap-1"
+                    className="px-2.5 py-1.5 bg-rose-700 hover:bg-rose-600 text-white rounded-lg text-xs font-bold font-mono transition flex items-center gap-1"
                   >
-                    <Radio class="w-3.5 h-3.5" />
+                    <Radio className="w-3.5 h-3.5" />
                     <span>Dispatch Patrol</span>
                   </button>
                 </div>
@@ -1615,17 +1628,17 @@ export function LiveOffenceSceneView({
           </div>
 
           {/* Playback Controls & Replay Speed */}
-          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div class="flex items-center gap-2">
+          <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
               <button
                 id="btn-scene-play-pause"
                 onClick={() => setIsPlaying(!isPlaying)}
-                class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-100 rounded-lg font-medium flex items-center gap-1.5 transition"
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-100 rounded-lg font-medium flex items-center gap-1.5 transition"
               >
                 {isPlaying ? (
-                  <Pause class="w-3.5 h-3.5 text-amber-400" />
+                  <Pause className="w-3.5 h-3.5 text-amber-400" />
                 ) : (
-                  <Play class="w-3.5 h-3.5 text-emerald-400" />
+                  <Play className="w-3.5 h-3.5 text-emerald-400" />
                 )}
                 <span>{isPlaying ? 'Pause Feed' : 'Resume Feed'}</span>
               </button>
@@ -1633,21 +1646,21 @@ export function LiveOffenceSceneView({
               <button
                 id="btn-scene-restart-sim"
                 onClick={initSceneVehicles}
-                class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition"
+                className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg transition"
                 title="Reset Scene Traffic"
               >
-                <RotateCcw class="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
 
             {/* Playback Speeds */}
-            <div class="flex items-center gap-1.5 font-mono">
-              <span class="text-slate-400 text-[11px]">SPEED:</span>
+            <div className="flex items-center gap-1.5 font-mono">
+              <span className="text-slate-400 text-[11px]">SPEED:</span>
               {[0.25, 0.5, 1, 2].map((spd) => (
                 <button
                   key={spd}
                   onClick={() => setPlaybackSpeed(spd)}
-                  class={`px-2 py-1 rounded text-xs transition ${
+                  className={`px-2 py-1 rounded text-xs transition ${
                     playbackSpeed === spd
                       ? 'bg-emerald-600 text-white font-bold'
                       : 'bg-slate-800 text-slate-400 hover:text-slate-200'
@@ -1658,82 +1671,82 @@ export function LiveOffenceSceneView({
               ))}
             </div>
 
-            <div class="text-[11px] font-mono text-slate-400">
+            <div className="text-[11px] font-mono text-slate-400">
               FRAME CAPTURE: 30 FPS • RTSA AI ENGINE V2.4
             </div>
           </div>
         </div>
 
         {/* Right Side: Live Offence Trigger Deck & Offender Telemetry (4 Cols) */}
-        <div class="lg:col-span-4 space-y-4">
+        <div className="lg:col-span-4 space-y-4">
           {/* Active Offender Telemetry Dossier */}
           {activeOffence && (
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-                <span class="text-xs font-bold font-mono text-slate-200 uppercase flex items-center gap-1.5">
-                  <Car class="w-4 h-4 text-cyan-400" />
+            <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span className="text-xs font-bold font-mono text-slate-200 uppercase flex items-center gap-1.5">
+                  <Car className="w-4 h-4 text-cyan-400" />
                   <span>Target Offender Dossier</span>
                 </span>
-                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-950 text-rose-300 border border-rose-800">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-950 text-rose-300 border border-rose-800">
                   {activeOffence.offenceType || 'SPEEDING'}
                 </span>
               </div>
 
               {/* Dynamic Snapshot of Offender */}
-              <div class="w-full h-28 rounded-xl overflow-hidden border border-slate-800 relative bg-slate-950">
+              <div className="w-full h-28 rounded-xl overflow-hidden border border-slate-800 relative bg-slate-950">
                 <img
                   src={currentSceneImage}
                   alt={activeOffence.plate}
-                  class="w-full h-full object-cover"
+                  className="w-full h-full object-cover"
                 />
-                <div class="absolute bottom-0 inset-x-0 bg-slate-950/80 backdrop-blur-sm p-1.5 text-[10px] font-mono text-slate-200 flex justify-between">
+                <div className="absolute bottom-0 inset-x-0 bg-slate-950/80 backdrop-blur-sm p-1.5 text-[10px] font-mono text-slate-200 flex justify-between">
                   <span>PLATE: {activeOffence.plate}</span>
-                  <span class="text-emerald-400 font-bold">RADAR MATCH: 98%</span>
+                  <span className="text-emerald-400 font-bold">RADAR MATCH: 98%</span>
                 </div>
               </div>
 
-              <div class="space-y-2 text-xs font-mono bg-slate-950 p-3 rounded-xl border border-slate-800">
-                <div class="flex justify-between">
-                  <span class="text-slate-400">VEHICLE PLATE:</span>
-                  <span class="text-amber-400 font-bold">{activeOffence.plate} (ZM)</span>
+              <div className="space-y-2 text-xs font-mono bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div className="flex justify-between">
+                  <span className="text-slate-400">VEHICLE PLATE:</span>
+                  <span className="text-amber-400 font-bold">{activeOffence.plate} (ZM)</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">MODEL & MAKE:</span>
-                  <span class="text-slate-200 truncate max-w-[170px]">{activeOffence.make}</span>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">MODEL & MAKE:</span>
+                  <span className="text-slate-200 truncate max-w-[170px]">{activeOffence.make}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">CLOCK SPEED:</span>
-                  <span class="text-rose-400 font-bold">
+                <div className="flex justify-between">
+                  <span className="text-slate-400">CLOCK SPEED:</span>
+                  <span className="text-rose-400 font-bold">
                     {activeOffence.speed} km/h (Limit: {selectedScene.speedLimit})
                   </span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">REGISTERED OWNER:</span>
-                  <span class="text-slate-200 truncate max-w-[170px]">{activeOffence.driverName}</span>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">REGISTERED OWNER:</span>
+                  <span className="text-slate-200 truncate max-w-[170px]">{activeOffence.driverName}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-400">STATUTORY FINE:</span>
-                  <span class="text-emerald-400 font-bold">ZMW {activeOffence.fineZMW}</span>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">STATUTORY FINE:</span>
+                  <span className="text-emerald-400 font-bold">ZMW {activeOffence.fineZMW}</span>
                 </div>
               </div>
 
-              <div class="flex items-center gap-2 pt-1">
+              <div className="flex items-center gap-2 pt-1">
                 <button
                   id="btn-dossier-generate-citation"
                   onClick={handleGenerateCitationFromLiveOffence}
-                  class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition shadow"
+                  className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition shadow"
                 >
-                  <FileText class="w-3.5 h-3.5" />
+                  <FileText className="w-3.5 h-3.5" />
                   <span>Generate Citation</span>
                 </button>
 
                 <button
                   id="btn-dossier-dispatch-patrol"
                   onClick={handleDispatchPatrolToScene}
-                  class="py-2.5 px-3 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition shadow"
+                  className="py-2.5 px-3 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold font-mono flex items-center justify-center gap-1.5 transition shadow"
                   title="Dispatch Nearest Highway Squad"
                 >
-                  <Radio class="w-3.5 h-3.5" />
+                  <Radio className="w-3.5 h-3.5" />
                   <span>Dispatch</span>
                 </button>
               </div>
@@ -1741,90 +1754,90 @@ export function LiveOffenceSceneView({
           )}
 
           {/* Instant Offence Injection Deck */}
-          <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-              <div class="flex items-center gap-2">
-                <Flame class="w-4 h-4 text-rose-400" />
-                <h3 class="text-xs font-bold text-slate-100 uppercase tracking-wider">
+          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
+              <div className="flex items-center gap-2">
+                <Flame className="w-4 h-4 text-rose-400" />
+                <h3 className="text-xs font-bold text-slate-100 uppercase tracking-wider">
                   Live Offence Injector Deck
                 </h3>
               </div>
-              <span class="text-[10px] font-mono text-emerald-400">INTERACTIVE</span>
+              <span className="text-[10px] font-mono text-emerald-400">INTERACTIVE</span>
             </div>
 
-            <p class="text-[11px] text-slate-400 leading-relaxed">
+            <p className="text-[11px] text-slate-400 leading-relaxed">
               Inject specific statutory traffic infractions into this scene to test radar detection and timeline recording:
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
               <button
                 id="btn-inject-excess-speed"
                 onClick={() => triggerOffence('Speeding')}
-                class="w-full p-2.5 bg-slate-950 hover:bg-rose-950/70 border border-slate-800 hover:border-rose-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
+                className="w-full p-2.5 bg-slate-950 hover:bg-rose-950/70 border border-slate-800 hover:border-rose-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
               >
                 <div>
-                  <div class="font-bold text-slate-200 group-hover:text-rose-300 flex items-center gap-1.5">
+                  <div className="font-bold text-slate-200 group-hover:text-rose-300 flex items-center gap-1.5">
                     <span>⚡ Excessive Speeding (+48 km/h)</span>
                   </div>
-                  <div class="text-[10px] text-slate-400 font-mono">Radar Laser Clocking • Fine: ZMW 750</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Radar Laser Clocking • Fine: ZMW 750</div>
                 </div>
-                <Zap class="w-4 h-4 text-rose-400" />
+                <Zap className="w-4 h-4 text-rose-400" />
               </button>
 
               <button
                 id="btn-inject-red-light"
                 onClick={() => triggerOffence('Red Light')}
-                class="w-full p-2.5 bg-slate-950 hover:bg-amber-950/70 border border-slate-800 hover:border-amber-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
+                className="w-full p-2.5 bg-slate-950 hover:bg-amber-950/70 border border-slate-800 hover:border-amber-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
               >
                 <div>
-                  <div class="font-bold text-slate-200 group-hover:text-amber-300 flex items-center gap-1.5">
+                  <div className="font-bold text-slate-200 group-hover:text-amber-300 flex items-center gap-1.5">
                     <span>🛑 Red Light Signal Breach</span>
                   </div>
-                  <div class="text-[10px] text-slate-400 font-mono">Public Minibus Violation • Fine: ZMW 500</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Public Minibus Violation • Fine: ZMW 500</div>
                 </div>
-                <AlertTriangle class="w-4 h-4 text-amber-400" />
+                <AlertTriangle className="w-4 h-4 text-amber-400" />
               </button>
 
               <button
                 id="btn-inject-stolen-car"
                 onClick={() => triggerOffence('Stolen Vehicle')}
-                class="w-full p-2.5 bg-slate-950 hover:bg-rose-950/70 border border-slate-800 hover:border-rose-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
+                className="w-full p-2.5 bg-slate-950 hover:bg-rose-950/70 border border-slate-800 hover:border-rose-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
               >
                 <div>
-                  <div class="font-bold text-slate-200 group-hover:text-rose-300 flex items-center gap-1.5">
+                  <div className="font-bold text-slate-200 group-hover:text-rose-300 flex items-center gap-1.5">
                     <span>🚨 Flagged Stolen Vehicle / Interpol</span>
                   </div>
-                  <div class="text-[10px] text-slate-400 font-mono">Instant Tactical Police Dispatch Order</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Instant Tactical Police Dispatch Order</div>
                 </div>
-                <ShieldAlert class="w-4 h-4 text-rose-500" />
+                <ShieldAlert className="w-4 h-4 text-rose-500" />
               </button>
 
               <button
                 id="btn-inject-reckless-overtake"
                 onClick={() => triggerOffence('Reckless Driving')}
-                class="w-full p-2.5 bg-slate-950 hover:bg-purple-950/70 border border-slate-800 hover:border-purple-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
+                className="w-full p-2.5 bg-slate-950 hover:bg-purple-950/70 border border-slate-800 hover:border-purple-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
               >
                 <div>
-                  <div class="font-bold text-slate-200 group-hover:text-purple-300 flex items-center gap-1.5">
+                  <div className="font-bold text-slate-200 group-hover:text-purple-300 flex items-center gap-1.5">
                     <span>⚠️ Double Solid Line Overtake</span>
                   </div>
-                  <div class="text-[10px] text-slate-400 font-mono">Dangerous Wrong-Way Maneuver</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Dangerous Wrong-Way Maneuver</div>
                 </div>
-                <FastForward class="w-4 h-4 text-purple-400" />
+                <FastForward className="w-4 h-4 text-purple-400" />
               </button>
 
               <button
                 id="btn-inject-stalled-truck"
                 onClick={() => triggerOffence('Lane Obstruction')}
-                class="w-full p-2.5 bg-slate-950 hover:bg-cyan-950/70 border border-slate-800 hover:border-cyan-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
+                className="w-full p-2.5 bg-slate-950 hover:bg-cyan-950/70 border border-slate-800 hover:border-cyan-600/80 rounded-xl text-xs text-left transition flex items-center justify-between group"
               >
                 <div>
-                  <div class="font-bold text-slate-200 group-hover:text-cyan-300 flex items-center gap-1.5">
+                  <div className="font-bold text-slate-200 group-hover:text-cyan-300 flex items-center gap-1.5">
                     <span>🚧 Stalled Haulage Truck Hazard</span>
                   </div>
-                  <div class="text-[10px] text-slate-400 font-mono">Lane Chokepoint & Tow Service Needed</div>
+                  <div className="text-[10px] text-slate-400 font-mono">Lane Chokepoint & Tow Service Needed</div>
                 </div>
-                <Car class="w-4 h-4 text-cyan-400" />
+                <Car className="w-4 h-4 text-cyan-400" />
               </button>
             </div>
           </div>

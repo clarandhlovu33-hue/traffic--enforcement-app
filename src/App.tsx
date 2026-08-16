@@ -120,7 +120,7 @@ export default function App() {
   };
 
   return (
-    <div class="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white">
       {/* Top Navigation Header with 3-Dot ⋮ Menu */}
       <Header
         currentView={currentView}
@@ -134,7 +134,7 @@ export default function App() {
       />
 
       {/* Main Workspace Container */}
-      <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5">
+      <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5">
         {/* VIEW 1: Command Dashboard (Default Split Overview) */}
         {currentView === 'dashboard' && (
           <CommandDashboard
@@ -170,22 +170,22 @@ export default function App() {
 
         {/* VIEW 2: Zambian Road Map View */}
         {currentView === 'map' && (
-          <div class="space-y-4">
-            <div class="flex items-center justify-between bg-slate-900/90 border border-slate-800 p-4 rounded-xl shadow-lg">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between bg-slate-900/90 border border-slate-800 p-4 rounded-xl shadow-lg">
               <div>
-                <h2 class="text-base font-bold text-slate-100 font-display">
+                <h2 className="text-base font-bold text-slate-100 font-display">
                   Zambian Road Network Tactical GIS Map ({currentCity})
                 </h2>
-                <p class="text-xs text-slate-400">
+                <p className="text-xs text-slate-400">
                   Surveillance of arterial corridors: Great East Road (T4), Kafue Road (T2), Kitwe-Ndola Dual Carriageway (T3).
                 </p>
               </div>
-              <div class="text-xs font-mono text-emerald-400 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
+              <div className="text-xs font-mono text-emerald-400 bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800">
                 18 CAMERAS • {patrolUnits.length} SQUADS ACTIVE
               </div>
             </div>
 
-            <div class="h-[680px] w-full">
+            <div className="h-[680px] w-full">
               <MapView
                 currentCity={currentCity}
                 cameras={cameras}
