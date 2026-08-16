@@ -1,0 +1,6 @@
+{
+  "name": "Zambia AI Traffic & Road Safety Command Center",
+  "description": "Next-generation Zambian AI Traffic Enforcement, CCTV computer vision analytics, automated ALPR plate recognition, incident dispatch, and road safety command dashboard for RTSA and police traffic units.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
